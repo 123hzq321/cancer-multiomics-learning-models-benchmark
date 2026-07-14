@@ -1,0 +1,132 @@
+\begin{thebibliography}{10}
+
+\bibitem{shen_icluster_2009}
+Ronglai Shen, Adam~B. Olshen, and Marc Ladanyi.
+\newblock Integrative clustering of multiple genomic data types using a joint
+  latent variable model with application to breast and lung cancer subtype
+  analysis.
+\newblock {\em Bioinformatics}, 25(22):2906--2912, 2009.
+
+\bibitem{argelaguet_mofa_2018}
+Ricard Argelaguet, Britta Velten, Damien Arnol, Sascha Dietrich, Thorsten Zenz,
+  John~C. Marioni, Florian Buettner, Wolfgang Huber, and Oliver Stegle.
+\newblock Multi-omics factor analysis--a framework for unsupervised integration
+  of multi-omics data sets.
+\newblock {\em Molecular Systems Biology}, 14(6), 2018.
+
+\bibitem{singh_diablo_2019}
+Amrit Singh, Casey~P. Shannon, Benoit Gautier, Florian Rohart, Michael Vacher,
+  Scott~J. Tebbutt, and Kim-Anh Le~Cao.
+\newblock {DIABLO}: an integrative approach for identifying key molecular
+  drivers from multi-omics assays.
+\newblock {\em Bioinformatics}, 35(17):3055--3062, 2019.
+
+\bibitem{wang_mogonet_2021}
+Tongxin Wang, Wei Shao, Zhi Huang, Haixu Tang, Jie Zhang, Zhengming Ding, and
+  Kun Huang.
+\newblock {MOGONET} integrates multi-omics data using graph convolutional
+  networks allowing patient classification and biomarker identification.
+\newblock {\em Nature Communications}, 12(1), 2021.
+
+\bibitem{valesilva_multisurv_2021}
+Luis~A. Vale-Silva and Karl Rohr.
+\newblock Long-term cancer survival prediction using multimodal deep learning.
+\newblock {\em Scientific Reports}, 11(1):13505, 2021.
+
+\bibitem{leng_benchmark_2022}
+Dongjin Leng, Linyi Zheng, Yuqi Wen, Yunhao Zhang, Lianlian Wu, Jing Wang,
+  Meihong Wang, Zhongnan Zhang, et~al.
+\newblock A benchmark study of deep learning-based multi-omics data fusion
+  methods for cancer.
+\newblock {\em Genome Biology}, 23(1):171, 2022.
+
+\bibitem{hasani_ltc_2021}
+Ramin Hasani, Mathias Lechner, Alexander Amini, Daniela Rus, and Radu Grosu.
+\newblock Liquid time-constant networks.
+\newblock {\em Nature Machine Intelligence}, 3:884--894, 2021.
+
+\bibitem{lechner_cfc_2022}
+Mathias Lechner, Ramin Hasani, Alexander Amini, Thomas~A. Henzinger, Daniela
+  Rus, and Radu Grosu.
+\newblock Closed-form continuous-time neural networks.
+\newblock {\em Nature Machine Intelligence}, 4:992--1003, 2022.
+
+\bibitem{tcga_brca_2012}
+{The Cancer Genome Atlas Network}.
+\newblock Comprehensive molecular portraits of human breast tumours.
+\newblock {\em Nature}, 490:61--70, 2012.
+
+\bibitem{curtis_metabric_2012}
+Christina Curtis, Sohrab~P. Shah, Suet-Feung Chin, et~al.
+\newblock The genomic and transcriptomic architecture of 2,000 breast tumours
+  reveals novel subgroups.
+\newblock {\em Nature}, 486:346--352, 2012.
+
+\bibitem{pereira_metabric_2016}
+Bernard Pereira, Suet-Feung Chin, Oscar~M. Rueda, et~al.
+\newblock The somatic mutation profiles of 2,433 breast cancers refines their
+  genomic and transcriptomic landscapes.
+\newblock {\em Nature Communications}, 7:11479, 2016.
+
+\bibitem{krug_cptac_2020}
+Karsten Krug, Eric~J. Jaehnig, Shankha Satpathy, et~al.
+\newblock Proteogenomic landscape of breast cancer tumorigenesis and targeted
+  therapy.
+\newblock {\em Cell}, 183(5):1436--1456.e31, 2020.
+
+\bibitem{gse96058}
+{Gene Expression Omnibus}.
+\newblock {GSE96058}: Gene expression profiling of breast cancer from the
+  population-based {SCAN-B} study.
+\newblock \url{https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96058},
+  2017.
+
+\bibitem{cerami_cbioportal_2012}
+Ethan Cerami, Jianjiong Gao, Ugur Dogrusoz, et~al.
+\newblock The cbio cancer genomics portal: An open platform for exploring
+  multidimensional cancer genomics data.
+\newblock {\em Cancer Discovery}, 2(5):401--404, 2012.
+
+\bibitem{gao_cbioportal_2013}
+Jianjiong Gao, B{\"u}lent~Arman Aksoy, Ugur Dogrusoz, et~al.
+\newblock Integrative analysis of complex cancer genomics and clinical profiles
+  using the cbioportal.
+\newblock {\em Science Signaling}, 6(269):pl1, 2013.
+
+\bibitem{tcga_ucec_2013}
+{The Cancer Genome Atlas Research Network}.
+\newblock Integrated genomic characterization of endometrial carcinoma.
+\newblock {\em Nature}, 497(7447):67--73, 2013.
+
+\bibitem{tcga_coadread_2012}
+{The Cancer Genome Atlas Network}.
+\newblock Comprehensive molecular characterization of human colon and rectal
+  cancer.
+\newblock {\em Nature}, 487(7407):330--337, 2012.
+
+\bibitem{tcga_hnsc_2015}
+{The Cancer Genome Atlas Network}.
+\newblock Comprehensive genomic characterization of head and neck squamous cell
+  carcinomas.
+\newblock {\em Nature}, 517(7536):576--582, 2015.
+
+\bibitem{tcga_kirc_2013}
+{The Cancer Genome Atlas Research Network}.
+\newblock Comprehensive molecular characterization of clear cell renal cell
+  carcinoma.
+\newblock {\em Nature}, 499(7456):43--49, 2013.
+
+\bibitem{tcga_prad_2015}
+{The Cancer Genome Atlas Research Network}.
+\newblock The molecular taxonomy of primary prostate cancer.
+\newblock {\em Cell}, 163(4):1011--1025, 2015.
+
+\bibitem{hoadley_pancancer_2018}
+Katherine~A. Hoadley, Christina Yau, Toshinori Hinoue, Denise~M. Wolf,
+  Alexander~J. Lazar, Esther Drill, Ronglai Shen, Allison~M. Taylor, Andrew~D.
+  Cherniack, Vesteinn Thorsson, et~al.
+\newblock Cell-of-origin patterns dominate the molecular classification of
+  10,000 tumors from 33 types of cancer.
+\newblock {\em Cell}, 173(2):291--304.e6, 2018.
+
+\end{thebibliography}

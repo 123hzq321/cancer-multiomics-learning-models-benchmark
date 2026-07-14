@@ -1,0 +1,6 @@
+,pred__Basal,pred__Her2,pred__LumA,pred__LumB,pred__Normal
+true__Basal,36,0,0,0,0
+true__Her2,0,18,0,0,0
+true__LumA,0,0,47,0,0
+true__LumB,1,1,20,43,0
+true__Normal,0,0,0,0,2

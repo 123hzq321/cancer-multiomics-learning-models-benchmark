@@ -1,0 +1,14 @@
+task,label,n
+UCEC_molecular_subtype,CN_HIGH,163
+UCEC_molecular_subtype,MSI,148
+UCEC_molecular_subtype,CN_LOW,147
+UCEC_molecular_subtype,POLE,49
+COADREAD_molecular_subtype,CIN,328
+COADREAD_molecular_subtype,MSI,63
+COADREAD_molecular_subtype,GS,58
+HNSC_HPV_status,HPV_NEG,415
+HNSC_HPV_status,HPV_POS,72
+KIRC_grade_binary,HIGH_GRADE,277
+KIRC_grade_binary,LOW_GRADE,227
+PRAD_pathologic_T_stage,T3_T4,300
+PRAD_pathologic_T_stage,T2,187

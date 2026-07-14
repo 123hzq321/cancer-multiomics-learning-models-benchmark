@@ -1,0 +1,89 @@
+\section{Data}
+
+\subsection{Training and validation cohorts}
+
+The final joined training setting used TCGA-BRCA and METABRIC breast cancer cohorts \cite{tcga_brca_2012,curtis_metabric_2012,pereira_metabric_2016}. TCGA-BRCA was first used as the original training cohort. METABRIC, previously held out as an external validation set, was then added to the training/validation pool to address limited sample size.
+
+The joined pool contained 2737 labeled samples and was split into 2326 training samples and 411 validation samples using stratified sampling. The model input was a breast cancer subtype marker panel consisting of 83 genes. For the mRNA-only setting, the input contained marker-gene expression z-scores. For the multimodal setting, the input contained marker-gene copy-number alteration, mutation status, and mRNA expression.
+
+The marker panel was chosen to represent known breast cancer subtype biology, including luminal/estrogen receptor programs, HER2-related genes, basal cytokeratin markers, proliferation and cell-cycle genes, and selected DNA repair and PI3K pathway genes. This feature choice was motivated by earlier experiments showing that a generic cancer-driver panel underperformed subtype-specific expression markers in external validation.
+
+\subsection{Model inputs and outputs}
+
+The system input is a sample-level molecular feature table. For BRCA subtype prediction, each row represents one tumor sample and contains an 83-gene marker panel measured as mRNA expression, with CNA and mutation features included in multimodal settings. The output is a five-class PAM50-like molecular subtype prediction. For the cancer-internal benchmark, each row represents one primary tumor sample and contains IMPACT468-based multi-omics features. The output is the corresponding cancer-internal clinical or molecular endpoint. Table~\ref{tab:input_output} summarizes the prediction interface used throughout the study.
+
+\begin{table}[ht]
+\centering
+\caption{System inputs and outputs.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+Analysis & Input unit & Input features & Output label \\
+\midrule
+BRCA subtype prediction & Tumor sample & 83-gene mRNA marker panel; CNA and mutation in multimodal setting & Basal, Her2, LumA, LumB, Normal \\
+UCEC internal task & Primary tumor sample & IMPACT468 multi-omics features & CN-high, CN-low, MSI, POLE \\
+COADREAD internal task & Primary tumor sample & IMPACT468 multi-omics features & CIN, MSI, genome-stable \\
+HNSC internal task & Primary tumor sample & IMPACT468 multi-omics features & HPV-positive versus HPV-negative \\
+KIRC internal task & Primary tumor sample & IMPACT468 multi-omics features & Low-grade versus high-grade \\
+PRAD internal task & Primary tumor sample & IMPACT468 multi-omics features & T2 versus T3/T4 pathologic stage \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:input_output}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Cohorts used in the final joined-training analysis.}
+\begin{tabular}{llrl}
+\toprule
+Cohort & Role & Samples & Available marker modalities \\
+\midrule
+TCGA-BRCA & Joined train/validation & 981 & mRNA, CNA, mutation \\
+METABRIC & Joined train/validation & 1756 & mRNA, CNA, mutation \\
+CPTAC 2020 & External validation & 122 & mRNA, CNA, mutation \\
+SMC 2018 & External validation & 168 & mRNA, mutation \\
+GSE96058/SCAN-B & External validation & 3137 & mRNA \\
+\bottomrule
+\end{tabular}
+\label{tab:cohorts}
+\end{table}
+
+\subsection{External validation cohorts}
+
+Three independent external validation cohorts were added after METABRIC was moved into the training pool. CPTAC 2020 provided the most relevant multimodal external validation because mRNA, copy-number alteration, and mutation features could be aligned to the marker panel \cite{krug_cptac_2020}. SMC 2018 and GSE96058/SCAN-B were used as mRNA marker external validation cohorts. SCAN-B was especially valuable because it provided a large RNA-seq external cohort with PAM50 subtype labels \cite{gse96058}. Cohorts accessed through cBioPortal used the public cBioPortal API \cite{cerami_cbioportal_2012,gao_cbioportal_2013}.
+
+\subsection{Preprocessing}
+
+For each training configuration, missing values were imputed using median imputation fitted on the training split only. Continuous features were standardized using training-split means and standard deviations. The same fitted preprocessing objects were then applied to validation and external cohorts. Mutation features were encoded as binary indicators. External cohorts lacking a modality were evaluated only in feature settings compatible with their available data.
+
+To avoid leakage, external validation cohorts were never used for model fitting, early stopping, preprocessing parameter estimation, or model selection. METABRIC was used as an external validation cohort in earlier experimental phases; in the final analysis reported here, it was intentionally moved into the training/validation pool to test whether a larger training cohort improved neural model generalization. CPTAC 2020, SMC 2018, and SCAN-B then served as independent external validation cohorts.
+
+\subsection{Sample alignment}
+
+All multi-omics tables were organized as one row per labelled tumor sample. The primary alignment key was \texttt{sampleId}; patient-level clinical endpoints were merged to sample-level molecular rows through \texttt{patientId} only when the original clinical annotation was patient-level. The same sample row was used for all molecular feature blocks in a given compatible experiment. We therefore did not combine expression from one tumor sample with copy-number, mutation, methylation, or protein measurements from another sample.
+
+Because different external cohorts provide different assays, modality availability was handled explicitly. CPTAC 2020 was used for multimodal BRCA external validation because mRNA, CNA, and mutation markers were available for the same sample identifiers. SMC 2018 and SCAN-B were used only for mRNA-compatible external comparisons. For the TCGA cancer-internal benchmark, mRNA, CNA, methylation, and mutation blocks had broad sample-level coverage, whereas RPPA was substantially sparser. We therefore added a core-aligned sensitivity analysis excluding RPPA. The sample-alignment audit is summarized in Supplementary Table~\ref{tab:supp_alignment}, and full modality coverage is provided in the accompanying audit report.
+
+\subsection{Multi-cancer internal benchmark extension}
+
+To address the limitation of a BRCA-only benchmark, we constructed an additional five-task cancer-internal benchmark from TCGA PanCancer Atlas cohorts. Unlike pan-cancer cancer-type classification, these tasks predict clinically or molecularly meaningful endpoints within a given cancer type. The selected tasks were UCEC molecular subtype, COADREAD molecular subtype, HNSC HPV status, KIRC histologic grade, and PRAD pathologic T stage. These endpoints were chosen because they reflect clinically relevant tumor biology: UCEC and COADREAD molecular subtypes capture genomic instability and subtype structure, HNSC HPV status reflects viral etiology and prognostic context, and KIRC grade and PRAD pathologic T stage are markers of tumor aggressiveness \cite{tcga_ucec_2013,tcga_coadread_2012,tcga_hnsc_2015,tcga_kirc_2013,tcga_prad_2015,hoadley_pancancer_2018}. The full multi-omics benchmark used the same IMPACT468-based feature table with mRNA, GISTIC copy-number alteration, log2 copy-number alteration, methylation, RPPA, and mutation features. The core-aligned sensitivity benchmark used mRNA, GISTIC copy-number alteration, log2 copy-number alteration, methylation, and mutation features, excluding RPPA because of sparse sample coverage.
+
+\begin{table}[ht]
+\centering
+\caption{Cancer-internal tasks added to the benchmark.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllr}
+\toprule
+Task & Cancer type & Prediction target & Labeled samples \\
+\midrule
+UCEC molecular subtype & UCEC & CN-high, CN-low, MSI, POLE & 507 \\
+COADREAD molecular subtype & COADREAD & CIN, MSI, genome-stable & 449 \\
+HNSC HPV status & HNSC & HPV-positive versus HPV-negative & 487 \\
+KIRC grade & KIRC & G1/G2 versus G3/G4 & 504 \\
+PRAD pathologic T stage & PRAD & T2 versus T3/T4 & 487 \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:multicancer_tasks}
+\end{table}

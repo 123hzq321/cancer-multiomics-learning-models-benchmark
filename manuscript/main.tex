@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{hyperref}
+\setlength{\emergencystretch}{3em}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\title{Comparative Evaluation of Multi-Omics Learning Models\\for Cancer Prediction with Breast Cancer External Validation\\and a Multi-Cancer Internal Benchmark}
+\author{
+Zhequan Hu\textsuperscript{1},
+Xingang Bi\textsuperscript{1,*}\\
+\textsuperscript{1}Department of Urology, National Cancer Center, Beijing, China\\
+Cancer Hospital, Chinese Academy of Medical Sciences\\
+and Peking Union Medical College, Beijing, China\\
+\textsuperscript{*}Corresponding author: Professor Xingang Bi, bixingang@csco.org.cn
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Liquid neural networks have been proposed as continuous-time recurrent models that can adapt hidden-state dynamics to input-dependent rates. Their suitability for cross-sectional cancer multi-omics prediction remains unclear because most multi-omics cohorts are not natural temporal sequences. We evaluated a closed-form Liquid/CfC-style model for breast cancer molecular subtype prediction using TCGA-BRCA and METABRIC as a joined training pool, followed by independent external validation on CPTAC 2020, SMC 2018, and GSE96058/SCAN-B. To address the limitation of a single-cancer benchmark, we further constructed a five-task TCGA PanCancer internal benchmark covering UCEC molecular subtype, COADREAD molecular subtype, HNSC HPV status, KIRC grade, and PRAD pathologic T stage. The model treated omics modalities as an ordered sequence of biological views and updated a latent disease-state representation through learned rates and gates. We compared the original Liquid/CfC model with a reduced-capacity small-Liquid/CfC model and an expanded suite of classical and neural baselines. In the BRCA external-validation study, multimodal Liquid/CfC was highly competitive on CPTAC 2020 (macro F1 = 0.8806, macro ROC-AUC = 0.9933), but extended mRNA-marker baselines, including elastic-net logistic regression and MLP, slightly exceeded it in macro F1. Increasing the mRNA training scale further with SCAN-B and SMC did not improve the best CPTAC external performance, indicating that cross-cohort domain shift can offset gains from larger sample size. In the multi-cancer internal benchmark, no model dominated universally; small-Liquid/CfC was best for PRAD pathologic T-stage prediction, whereas tree-based or linear baselines were strongest for several subtype tasks. These results suggest that Liquid/CfC is a plausible cross-omics fusion architecture, but its advantage is context-dependent rather than universal.
+\end{abstract}
+
+\noindent\textbf{Keywords:} multi-omics; cancer genomics; breast cancer; external validation; TCGA; METABRIC; liquid neural network; closed-form continuous-time neural network
+
+\input{sections/introduction}
+\input{sections/data}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/availability}
+
+\clearpage
+\appendix
+\input{sections/supplement}
+\clearpage
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}

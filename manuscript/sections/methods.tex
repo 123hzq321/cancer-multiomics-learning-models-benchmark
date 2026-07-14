@@ -1,0 +1,116 @@
+\section{Methods}
+
+\subsection{Prediction task}
+
+For each tumor sample \(i\), the model receives one or more molecular feature vectors:
+\[
+X_i = \{x_i^{(1)}, x_i^{(2)}, \ldots, x_i^{(M)}\},
+\]
+where each \(x_i^{(m)}\) corresponds to one omics modality. The model predicts the probability of each breast cancer molecular subtype:
+\[
+\hat{p}_i = \mathrm{softmax}(f_\theta(X_i)).
+\]
+Performance was evaluated using accuracy, balanced accuracy, macro F1, and one-vs-rest macro ROC-AUC.
+
+Macro F1 was treated as the primary external validation metric because subtype classes were imbalanced, especially for Normal-like and Her2-enriched subtypes. ROC-AUC was reported as a complementary ranking metric but was not used alone to determine biological utility, because high AUC can coexist with lower macro F1 in imbalanced multi-class settings.
+
+\subsection{Liquid/CfC cross-omics model}
+
+The Liquid/CfC model treated omics modalities as a short ordered sequence of biological views. Each modality was first encoded into a shared embedding dimension:
+\[
+z_m = \mathrm{Encoder}_m(x_m) + e_m,
+\]
+where \(e_m\) is a learned modality embedding.
+
+The hidden state was initialized as \(h_0=0\). For modality step \(m\), the model computed an input-dependent rate, interpolation coefficient, candidate state, gate, and target state:
+\begin{align}
+r_m &= \mathrm{softplus}\left(W_r[z_m, h_{m-1}] + b_r\right) + \epsilon, \\
+\alpha_m &= 1 - \exp(-r_m \Delta t), \\
+\tilde{h}_m &= \tanh(W_x z_m + W_h h_{m-1} + b), \\
+g_m &= \sigma\left(W_g[z_m, h_{m-1}] + b_g\right), \\
+u_m &= g_m \odot \tilde{h}_m + (1-g_m)\odot h_{m-1}, \\
+h_m &= (1-\alpha_m)\odot h_{m-1} + \alpha_m \odot u_m.
+\end{align}
+
+The final hidden state was passed to a linear classifier:
+\[
+\hat{p} = \mathrm{softmax}(W_o \mathrm{LayerNorm}(h_M)+b_o).
+\]
+
+This update can be interpreted as the closed-form solution of a first-order continuous-time system over a short interval:
+\[
+\frac{dh(t)}{dt} = r(t)\odot \left(u(t)-h(t)\right),
+\]
+assuming \(r(t)\) and \(u(t)\) are approximately constant within the interval. In this project, \(\Delta t=1\) because the modality sequence is not a natural temporal series.
+
+\subsection{Small-Liquid/CfC}
+
+To test whether the original Liquid/CfC model was over-parameterized for small biomedical cohorts, we implemented a reduced-capacity small-Liquid/CfC variant. The original model used an embedding dimension of 64 and hidden dimension of 96. The small-Liquid model used an embedding dimension of 32 and hidden dimension of 48.
+
+\begin{table}[ht]
+\centering
+\caption{Trainable parameter counts for the final joined-training models.}
+\begin{tabular}{llr}
+\toprule
+Feature set & Model & Trainable parameters \\
+\midrule
+Marker mRNA & MLP & 19,717 \\
+Marker mRNA & Liquid/CfC & 52,613 \\
+Marker mRNA & small-Liquid/CfC & 14,789 \\
+Marker multimodal & MLP & 40,965 \\
+Marker multimodal & Liquid/CfC & 63,749 \\
+Marker multimodal & small-Liquid/CfC & 20,357 \\
+\bottomrule
+\end{tabular}
+\label{tab:params}
+\end{table}
+
+\subsection{Baselines}
+
+We compared Liquid/CfC with multiple baseline families rather than a single comparator. The BRCA external-validation study included class-balanced logistic regression, elastic-net logistic regression, calibrated linear SVM, ridge classifier, shrinkage LDA, Gaussian naive Bayes, k-nearest neighbors, random forest, ExtraTrees, histogram gradient boosting, and MLP baselines. The cancer-internal benchmark used a computationally tractable subset covering elastic-net logistic regression, ExtraTrees, histogram gradient boosting, early-fusion MLP, Liquid/CfC, and small-Liquid/CfC. Earlier exploratory phases additionally tested recurrent, convolutional, attention, Transformer, pooling, and gated-fusion neural baselines.
+
+\begin{table}[ht]
+\centering
+\caption{Baseline families used to avoid a single-model single-score evaluation.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lll}
+\toprule
+Family & Models used in this study & Rationale \\
+\midrule
+Linear/discriminant & Logistic, ElasticNet, ridge, linear SVM, LDA & Strong high-dimensional expression baselines \\
+Probabilistic/instance & Gaussian naive Bayes, k-nearest neighbors & Simple non-neural comparators \\
+Tree/boosting & Random forest, ExtraTrees, HistGradientBoosting & Nonlinear tabular baselines without neural sequence assumptions \\
+Static neural & Early-fusion MLP, sklearn MLP & Neural baseline without Liquid/CfC dynamics \\
+Sequence/fusion neural & GRU, LSTM, TCN, Transformer, attention, gated fusion & Exploratory neural fusion baselines \\
+Liquid/CfC & Original and small-Liquid/CfC & Proposed input-adaptive cross-omics state update \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:baseline_families}
+\end{table}
+
+Specialized multi-omics methods such as iCluster, MOFA, DIABLO, and MOGONET provide important reference points for integration \cite{shen_icluster_2009,argelaguet_mofa_2018,singh_diablo_2019,wang_mogonet_2021}. We did not claim to replace these methods. Instead, the present study asks whether a Liquid/CfC-style state-update module remains competitive against strong practical predictive baselines under external validation and multi-task internal benchmarking.
+
+\subsection{Training protocol}
+
+Neural models were trained with AdamW using a learning rate of \(10^{-3}\), weight decay of \(10^{-4}\), mini-batch size of 64, and early stopping on the joined validation split. Cross-entropy loss was class-weighted according to training-set subtype frequencies. Gradients were clipped to a maximum norm of 5.0. Each experiment was repeated with three random seeds (42, 43, and 44), and summary metrics report the mean across seeds.
+
+Classical baselines were trained on the same preprocessed feature matrices. Logistic regression used class-balanced multinomial optimization. ExtraTrees used 700 estimators with class-balanced weighting, square-root feature subsampling, and a minimum leaf size of 2. All preprocessing was fitted on the training split only.
+
+\subsection{Omics ordering}
+
+For the multimodal marker setting, the main Liquid/CfC order was copy-number alteration, mutation, and mRNA expression. This ``expression-last'' order was selected because earlier ablation experiments suggested that mRNA was the dominant subtype signal and that allowing weaker genomic layers to update the hidden state before expression produced better Liquid/CfC behavior than the original arbitrary order. This ordering should be interpreted as a modeling hypothesis rather than a biological temporal process.
+
+\subsection{Multi-cancer internal benchmark protocol}
+
+For the five added cancer-internal tasks, we used the same TCGA PanCancer multi-omics table and the same model families across tasks. Each task was split into stratified 70\% training, 15\% validation, and 15\% test partitions. Splitting was repeated with three random seeds (42, 43, and 44). The test split was used only for final reporting.
+
+The evaluated models were elastic-net logistic regression, ExtraTrees, histogram gradient boosting, early-fusion MLP, Liquid/CfC, and small-Liquid/CfC. This reduced but strong model set was chosen to keep the benchmark computationally tractable while preserving representative linear, tree-based, boosting, static neural, and Liquid/CfC fusion families. All models used the same multi-omics feature set within each experiment. The full benchmark used mRNA, GISTIC copy-number alteration, log2 copy-number alteration, methylation, RPPA, and mutation features. The core-aligned sensitivity benchmark used mRNA, GISTIC copy-number alteration, log2 copy-number alteration, methylation, and mutation features. Metrics were summarized as mean and standard deviation across seeds.
+
+\subsection{Cross-validation, significance testing, and noise robustness}
+
+To address whether small model-score differences reflected stochastic variation, we added a reviewer-motivated ten-fold cross-validation analysis on the core-aligned multi-cancer benchmark. In each fold, 10\% of samples were held out as the test fold; the remaining samples were split into training and validation subsets for preprocessing and neural early stopping. The same six model families were evaluated in every fold.
+
+For each task, we compared the top-ranked model with the runner-up using fold-level paired macro F1 differences. We report the mean paired difference, a bootstrap 95\% confidence interval over folds, a two-sided Wilcoxon signed-rank test when applicable, and Holm-adjusted \(p\)-values across the five tasks. These tests are interpreted as sensitivity checks rather than definitive claims of superiority.
+
+Noise robustness was evaluated by adding Gaussian noise to standardized test features after model training. Noise standard deviations were \(0.05\), \(0.10\), \(0.20\), \(0.30\), and \(0.50\), in units of the standardized feature scale. The noise ``elbow'' was estimated as the maximum-distance knee point of the clean-to-high-noise macro F1 curve. We also recorded the first noise level at which macro F1 dropped by at least 5\% relative to the clean test set.

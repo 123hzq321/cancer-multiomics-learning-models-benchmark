@@ -1,0 +1,218 @@
+\section{Supplementary Tables}
+
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\begin{table}[ht]
+\centering
+\caption{Cancer-internal task label distributions.}
+\begin{tabular}{llr}
+\toprule
+Task & Label & Samples \\
+\midrule
+UCEC molecular subtype & CN\_HIGH & 163 \\
+UCEC molecular subtype & MSI & 148 \\
+UCEC molecular subtype & CN\_LOW & 147 \\
+UCEC molecular subtype & POLE & 49 \\
+COADREAD molecular subtype & CIN & 328 \\
+COADREAD molecular subtype & MSI & 63 \\
+COADREAD molecular subtype & GS & 58 \\
+HNSC HPV status & HPV\_NEG & 415 \\
+HNSC HPV status & HPV\_POS & 72 \\
+KIRC grade & HIGH\_GRADE & 277 \\
+KIRC grade & LOW\_GRADE & 227 \\
+PRAD pathologic T stage & T3\_T4 & 300 \\
+PRAD pathologic T stage & T2 & 187 \\
+\bottomrule
+\end{tabular}
+\label{tab:supp_label_counts}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{UCEC molecular subtype benchmark results. Values are mean $\pm$ standard deviation across three random seeds.}
+\begin{tabular}{lrr}
+\toprule
+Model & Macro F1 & Macro ROC-AUC \\
+\midrule
+Logistic ElasticNet & 0.913 $\pm$ 0.050 & 0.983 $\pm$ 0.010 \\
+ExtraTrees & 0.906 $\pm$ 0.053 & 0.984 $\pm$ 0.008 \\
+Liquid/CfC & 0.890 $\pm$ 0.051 & 0.986 $\pm$ 0.007 \\
+MLP & 0.888 $\pm$ 0.027 & 0.978 $\pm$ 0.012 \\
+HistGradientBoosting & 0.887 $\pm$ 0.055 & 0.983 $\pm$ 0.006 \\
+small-Liquid/CfC & 0.876 $\pm$ 0.077 & 0.985 $\pm$ 0.014 \\
+\bottomrule
+\end{tabular}
+\label{tab:supp_ucec}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{COADREAD molecular subtype benchmark results. Values are mean $\pm$ standard deviation across three random seeds.}
+\begin{tabular}{lrr}
+\toprule
+Model & Macro F1 & Macro ROC-AUC \\
+\midrule
+ExtraTrees & 0.906 $\pm$ 0.049 & 0.955 $\pm$ 0.007 \\
+MLP & 0.891 $\pm$ 0.043 & 0.973 $\pm$ 0.008 \\
+small-Liquid/CfC & 0.876 $\pm$ 0.030 & 0.956 $\pm$ 0.021 \\
+HistGradientBoosting & 0.875 $\pm$ 0.034 & 0.959 $\pm$ 0.010 \\
+Logistic ElasticNet & 0.863 $\pm$ 0.019 & 0.968 $\pm$ 0.001 \\
+Liquid/CfC & 0.858 $\pm$ 0.025 & 0.969 $\pm$ 0.004 \\
+\bottomrule
+\end{tabular}
+\label{tab:supp_coadread}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{HNSC HPV status benchmark results. Values are mean $\pm$ standard deviation across three random seeds.}
+\begin{tabular}{lrr}
+\toprule
+Model & Macro F1 & Macro ROC-AUC \\
+\midrule
+ExtraTrees & 0.951 $\pm$ 0.046 & 0.994 $\pm$ 0.010 \\
+Logistic ElasticNet & 0.936 $\pm$ 0.045 & 0.977 $\pm$ 0.030 \\
+HistGradientBoosting & 0.928 $\pm$ 0.042 & 0.986 $\pm$ 0.016 \\
+Liquid/CfC & 0.902 $\pm$ 0.036 & 0.977 $\pm$ 0.032 \\
+small-Liquid/CfC & 0.889 $\pm$ 0.126 & 0.964 $\pm$ 0.034 \\
+MLP & 0.760 $\pm$ 0.051 & 0.992 $\pm$ 0.013 \\
+\bottomrule
+\end{tabular}
+\label{tab:supp_hnsc}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{KIRC grade benchmark results. Values are mean $\pm$ standard deviation across three random seeds.}
+\begin{tabular}{lrr}
+\toprule
+Model & Macro F1 & Macro ROC-AUC \\
+\midrule
+HistGradientBoosting & 0.700 $\pm$ 0.016 & 0.756 $\pm$ 0.008 \\
+ExtraTrees & 0.688 $\pm$ 0.049 & 0.753 $\pm$ 0.041 \\
+Liquid/CfC & 0.686 $\pm$ 0.021 & 0.770 $\pm$ 0.051 \\
+Logistic ElasticNet & 0.676 $\pm$ 0.079 & 0.705 $\pm$ 0.046 \\
+small-Liquid/CfC & 0.675 $\pm$ 0.059 & 0.718 $\pm$ 0.043 \\
+MLP & 0.659 $\pm$ 0.062 & 0.751 $\pm$ 0.041 \\
+\bottomrule
+\end{tabular}
+\label{tab:supp_kirc}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{PRAD pathologic T-stage benchmark results. Values are mean $\pm$ standard deviation across three random seeds.}
+\begin{tabular}{lrr}
+\toprule
+Model & Macro F1 & Macro ROC-AUC \\
+\midrule
+small-Liquid/CfC & 0.707 $\pm$ 0.065 & 0.772 $\pm$ 0.044 \\
+HistGradientBoosting & 0.692 $\pm$ 0.027 & 0.748 $\pm$ 0.065 \\
+ExtraTrees & 0.679 $\pm$ 0.016 & 0.780 $\pm$ 0.048 \\
+MLP & 0.674 $\pm$ 0.057 & 0.768 $\pm$ 0.023 \\
+Liquid/CfC & 0.669 $\pm$ 0.070 & 0.732 $\pm$ 0.093 \\
+Logistic ElasticNet & 0.614 $\pm$ 0.048 & 0.704 $\pm$ 0.101 \\
+\bottomrule
+\end{tabular}
+\label{tab:supp_prad}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Sample-alignment audit. Each labelled analysis table contains one row per sample identifier and no duplicated sample IDs after endpoint filtering.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrl}
+\toprule
+Analysis & Dataset & Samples & Unique IDs & Duplicate IDs & Compatible experiment \\
+\midrule
+BRCA joined training & TCGA+METABRIC & 2737 & 2737 & 0 & mRNA and multimodal \\
+BRCA external validation & CPTAC 2020 & 122 & 122 & 0 & mRNA and multimodal \\
+BRCA external validation & SMC 2018 & 168 & 168 & 0 & mRNA-only comparison \\
+BRCA external validation & SCAN-B/GSE96058 & 3137 & 3137 & 0 & mRNA-only comparison \\
+TCGA internal benchmark & UCEC molecular subtype & 507 & 507 & 0 & aligned internal multi-omics \\
+TCGA internal benchmark & COADREAD molecular subtype & 449 & 449 & 0 & aligned internal multi-omics \\
+TCGA internal benchmark & HNSC HPV status & 487 & 487 & 0 & aligned internal multi-omics \\
+TCGA internal benchmark & KIRC grade & 504 & 504 & 0 & aligned internal multi-omics \\
+TCGA internal benchmark & PRAD pathologic T stage & 487 & 487 & 0 & aligned internal multi-omics \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:supp_alignment}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Core-aligned cancer-internal sensitivity analysis excluding sparse RPPA features. Values are mean $\pm$ standard deviation across three random seeds.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrr}
+\toprule
+Task & Best model & Macro F1 & Macro ROC-AUC \\
+\midrule
+COADREAD molecular subtype & Liquid/CfC & 0.918 $\pm$ 0.011 & 0.967 $\pm$ 0.013 \\
+HNSC HPV status & Logistic ElasticNet & 0.943 $\pm$ 0.034 & 0.978 $\pm$ 0.030 \\
+KIRC grade & ExtraTrees & 0.711 $\pm$ 0.044 & 0.741 $\pm$ 0.055 \\
+PRAD pathologic T stage & HistGradientBoosting & 0.703 $\pm$ 0.062 & 0.755 $\pm$ 0.079 \\
+UCEC molecular subtype & Logistic ElasticNet & 0.910 $\pm$ 0.045 & 0.982 $\pm$ 0.011 \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:supp_core_aligned}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Ten-fold cross-validation best model per core-aligned cancer-internal task. RPPA was excluded from this sensitivity analysis.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrr}
+\toprule
+Task & Best model & Macro F1 & Macro ROC-AUC \\
+\midrule
+COADREAD molecular subtype & ExtraTrees & 0.868 $\pm$ 0.069 & 0.955 \\
+HNSC HPV status & Logistic ElasticNet & 0.947 $\pm$ 0.038 & 0.961 \\
+KIRC grade & ExtraTrees & 0.666 $\pm$ 0.064 & 0.730 \\
+PRAD pathologic T stage & HistGradientBoosting & 0.682 $\pm$ 0.039 & 0.749 \\
+UCEC molecular subtype & ExtraTrees & 0.894 $\pm$ 0.068 & 0.983 \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:supp_cv_best}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Fold-level top-versus-runner-up comparison in ten-fold cross-validation. Raw paired-test \(p\)-values are shown; no comparison survived Holm correction across the five tasks.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllcrrrr}
+\toprule
+Task & Top model & Runner-up & Top wins & Mean F1 difference & 95\% CI low & 95\% CI high & Raw \(p\) \\
+\midrule
+COADREAD molecular subtype & ExtraTrees & small-Liquid/CfC & 5/10 & 0.005 & -0.043 & 0.051 & 1.000 \\
+HNSC HPV status & Logistic ElasticNet & HistGradientBoosting & 5/10 & 0.016 & -0.014 & 0.047 & 0.375 \\
+KIRC grade & ExtraTrees & HistGradientBoosting & 7/10 & 0.013 & -0.038 & 0.061 & 0.557 \\
+PRAD pathologic T stage & HistGradientBoosting & ExtraTrees & 5/10 & 0.004 & -0.028 & 0.032 & 0.826 \\
+UCEC molecular subtype & ExtraTrees & Logistic ElasticNet & 7/10 & 0.005 & -0.039 & 0.047 & 0.695 \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:supp_cv_significance}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Noise robustness and estimated elbow for the best cross-validated model in each core-aligned task. Noise was added to standardized test features after training.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+Task & Model & Clean F1 & F1 at \(\sigma=0.20\) & F1 at \(\sigma=0.50\) & First 5\% drop & Elbow \(\sigma\) \\
+\midrule
+COADREAD molecular subtype & ExtraTrees & 0.868 & 0.847 & 0.736 & 0.30 & 0.30 \\
+HNSC HPV status & Logistic ElasticNet & 0.947 & 0.940 & 0.943 & Not reached & 0.30 \\
+KIRC grade & ExtraTrees & 0.666 & 0.628 & 0.514 & 0.20 & 0.30 \\
+PRAD pathologic T stage & HistGradientBoosting & 0.682 & 0.570 & 0.482 & 0.10 & 0.10 \\
+UCEC molecular subtype & ExtraTrees & 0.894 & 0.894 & 0.860 & Not reached & 0.30 \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:supp_noise_elbow}
+\end{table}

@@ -1,0 +1,10 @@
+analysis,dataset,sample_unit,alignment_key,n_rows,n_labelled_rows,n_unique_sample_ids,n_duplicate_sample_ids,n_unique_patient_ids,n_classes,modalities_requested,compatible_experiment,split_counts
+BRCA joined training,TCGA+METABRIC,tumor sample,sampleId,2737,2737,2737,0,2737,5,"mrna_z, cna, mutation",mRNA and multimodal,train:2326; valid:411
+BRCA external validation,CPTAC 2020,tumor sample,sampleId,122,122,122,0,122,5,"mrna_z, cna, mutation",mRNA and multimodal,cptac_2020_external:122
+BRCA external validation,SMC 2018,tumor sample,sampleId,168,168,168,0,168,5,"mrna_z, mutation",mRNA-only reported for cross-cohort comparison,smc_2018_external:168
+BRCA external validation,SCAN-B/GSE96058,tumor sample,sampleId,3137,3137,3137,0,,5,mrna_z,mRNA-only,scanb_external:3137
+TCGA cancer-internal benchmark,UCEC molecular subtype,primary tumor sample,sampleId,507,507,507,0,507,4,"mrna, gistic, log2cna, methylation, rppa, mutation",aligned internal multi-omics,see seed-specific split files
+TCGA cancer-internal benchmark,COADREAD molecular subtype,primary tumor sample,sampleId,449,449,449,0,449,3,"mrna, gistic, log2cna, methylation, rppa, mutation",aligned internal multi-omics,see seed-specific split files
+TCGA cancer-internal benchmark,HNSC HPV status,primary tumor sample,sampleId,487,487,487,0,487,2,"mrna, gistic, log2cna, methylation, rppa, mutation",aligned internal multi-omics,see seed-specific split files
+TCGA cancer-internal benchmark,KIRC grade,primary tumor sample,sampleId,504,504,504,0,504,2,"mrna, gistic, log2cna, methylation, rppa, mutation",aligned internal multi-omics,see seed-specific split files
+TCGA cancer-internal benchmark,PRAD pathologic T stage,primary tumor sample,sampleId,487,487,487,0,487,2,"mrna, gistic, log2cna, methylation, rppa, mutation",aligned internal multi-omics,see seed-specific split files

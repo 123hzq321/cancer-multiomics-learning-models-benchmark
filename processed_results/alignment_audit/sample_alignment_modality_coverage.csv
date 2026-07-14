@@ -1,0 +1,40 @@
+analysis,dataset,modality,n_features,rows_with_any_observed_feature,rows_with_all_features_observed,labelled_rows,feature_missing_fraction,feature_missing_percent
+BRCA joined training,TCGA+METABRIC,mrna_z,83,2737,2737,2737,0.0,0.0%
+BRCA joined training,TCGA+METABRIC,cna,83,2737,2737,2737,0.0,0.0%
+BRCA joined training,TCGA+METABRIC,mutation,83,2737,2737,2737,0.0,0.0%
+BRCA external validation,CPTAC 2020,mrna_z,83,122,35,122,0.017776022121271974,1.8%
+BRCA external validation,CPTAC 2020,cna,83,122,122,122,0.0,0.0%
+BRCA external validation,CPTAC 2020,mutation,83,122,122,122,0.0,0.0%
+BRCA external validation,SMC 2018,mrna_z,83,168,0,168,0.012048192771084338,1.2%
+BRCA external validation,SMC 2018,mutation,83,168,168,168,0.0,0.0%
+BRCA external validation,SCAN-B/GSE96058,mrna_z,83,3137,3137,3137,0.0,0.0%
+TCGA cancer-internal benchmark,UCEC molecular subtype,mrna,469,507,167,507,0.012868876244306784,1.3%
+TCGA cancer-internal benchmark,UCEC molecular subtype,gistic,469,507,0,507,0.0021321961620469083,0.2%
+TCGA cancer-internal benchmark,UCEC molecular subtype,log2cna,469,507,0,507,0.0021321961620469083,0.2%
+TCGA cancer-internal benchmark,UCEC molecular subtype,methylation,387,507,0,507,0.005580783756096815,0.6%
+TCGA cancer-internal benchmark,UCEC molecular subtype,rppa,469,405,0,507,0.889289814662949,88.9%
+TCGA cancer-internal benchmark,UCEC molecular subtype,mutation,469,507,507,507,0.0,0.0%
+TCGA cancer-internal benchmark,COADREAD molecular subtype,mrna,469,449,339,449,0.004701278842820577,0.5%
+TCGA cancer-internal benchmark,COADREAD molecular subtype,gistic,469,449,0,449,0.0021321961620469083,0.2%
+TCGA cancer-internal benchmark,COADREAD molecular subtype,log2cna,469,449,0,449,0.0021321961620469083,0.2%
+TCGA cancer-internal benchmark,COADREAD molecular subtype,methylation,387,449,0,449,0.006290176850077404,0.6%
+TCGA cancer-internal benchmark,COADREAD molecular subtype,rppa,469,356,0,449,0.8901135430072039,89.0%
+TCGA cancer-internal benchmark,COADREAD molecular subtype,mutation,469,449,449,449,0.0,0.0%
+TCGA cancer-internal benchmark,HNSC HPV status,mrna,469,487,487,487,0.0,0.0%
+TCGA cancer-internal benchmark,HNSC HPV status,gistic,469,487,0,487,0.0021321961620469083,0.2%
+TCGA cancer-internal benchmark,HNSC HPV status,log2cna,469,487,0,487,0.0021321961620469083,0.2%
+TCGA cancer-internal benchmark,HNSC HPV status,methylation,387,487,0,487,0.005603043471340114,0.6%
+TCGA cancer-internal benchmark,HNSC HPV status,rppa,469,202,0,487,0.9425138899226367,94.3%
+TCGA cancer-internal benchmark,HNSC HPV status,mutation,469,487,487,487,0.0,0.0%
+TCGA cancer-internal benchmark,KIRC grade,mrna,469,502,502,504,0.003968253968253968,0.4%
+TCGA cancer-internal benchmark,KIRC grade,gistic,469,501,0,504,0.008071885470606152,0.8%
+TCGA cancer-internal benchmark,KIRC grade,log2cna,469,501,0,504,0.008071885470606152,0.8%
+TCGA cancer-internal benchmark,KIRC grade,methylation,387,503,0,504,0.008685041630778064,0.9%
+TCGA cancer-internal benchmark,KIRC grade,rppa,469,451,0,504,0.875981487122212,87.6%
+TCGA cancer-internal benchmark,KIRC grade,mutation,469,504,504,504,0.0,0.0%
+TCGA cancer-internal benchmark,PRAD pathologic T stage,mrna,469,486,453,487,0.0021978695551284353,0.2%
+TCGA cancer-internal benchmark,PRAD pathologic T stage,gistic,469,482,0,487,0.012377245482765113,1.2%
+TCGA cancer-internal benchmark,PRAD pathologic T stage,log2cna,469,482,0,487,0.012377245482765113,1.2%
+TCGA cancer-internal benchmark,PRAD pathologic T stage,methylation,387,487,0,487,0.005486313399020529,0.5%
+TCGA cancer-internal benchmark,PRAD pathologic T stage,rppa,469,345,0,487,0.9018182773431173,90.2%
+TCGA cancer-internal benchmark,PRAD pathologic T stage,mutation,469,487,487,487,0.0,0.0%
