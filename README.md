@@ -6,6 +6,8 @@ This repository accompanies the manuscript:
 
 The repository contains analysis scripts, compact processed result tables, figures, reports, and the LaTeX manuscript source for a public cancer multi-omics prediction benchmark. The study evaluates Liquid/CfC-style neural fusion, a reduced small-Liquid/CfC model, classical machine-learning baselines, and neural baselines for breast cancer subtype prediction and five TCGA cancer-internal tasks.
 
+Public repository URL: <https://github.com/123hzq321/cancer-multiomics-learning-models-benchmark>
+
 ## Main Analyses
 
 1. Breast cancer external validation using TCGA-BRCA and METABRIC as a joined training pool, with CPTAC 2020, SMC 2018, and GSE96058/SCAN-B as external validation cohorts.
@@ -51,4 +53,3 @@ The scripts use public cohorts from cBioPortal, GEO, and associated public proce
 ## License
 
 Code is released under the MIT License. Public dataset terms remain governed by their original data providers.
-
