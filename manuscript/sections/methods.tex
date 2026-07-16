@@ -46,6 +46,7 @@ assuming \(r(t)\) and \(u(t)\) are approximately constant within the interval. I
 \subsection{Small-Liquid/CfC}
 
 To test whether the original Liquid/CfC model was over-parameterized for small biomedical cohorts, we implemented a reduced-capacity small-Liquid/CfC variant. The original model used an embedding dimension of 64 and hidden dimension of 96. The small-Liquid model used an embedding dimension of 32 and hidden dimension of 48.
+The resulting trainable parameter counts for the BRCA joined-training models are reported in Table~\ref{tab:params}.
 
 \begin{table}[ht]
 \centering
@@ -68,6 +69,7 @@ Marker multimodal & small-Liquid/CfC & 20,357 \\
 \subsection{Baselines}
 
 We compared Liquid/CfC with multiple baseline families rather than a single comparator. The BRCA external-validation study included class-balanced logistic regression, elastic-net logistic regression, calibrated linear SVM, ridge classifier, shrinkage LDA, Gaussian naive Bayes, k-nearest neighbors, random forest, ExtraTrees, histogram gradient boosting, and MLP baselines. The cancer-internal benchmark used a computationally tractable subset covering elastic-net logistic regression, ExtraTrees, histogram gradient boosting, early-fusion MLP, Liquid/CfC, and small-Liquid/CfC. Earlier exploratory phases additionally tested recurrent, convolutional, attention, Transformer, pooling, and gated-fusion neural baselines.
+The baseline families and their roles in the study design are summarized in Table~\ref{tab:baseline_families}.
 
 \begin{table}[ht]
 \centering

@@ -8,7 +8,7 @@ The parameter-count reduction experiment confirmed that the original Liquid/CfC 
 
 \subsection{External validation after adding METABRIC to training}
 
-Adding METABRIC increased the training pool substantially and improved the competitiveness of Liquid/CfC on external cohorts. CPTAC 2020 was the most relevant multimodal external validation cohort because mRNA, CNA, and mutation features were all available. In the initial joined-training comparison, multimodal Liquid/CfC achieved the highest macro F1 among the tested Liquid, MLP, tree, and logistic models, narrowly outperforming mRNA-only MLP. This finding was subsequently reinterpreted after the extended baseline study, where elastic-net logistic regression and sklearn MLP slightly exceeded Liquid/CfC.
+Adding METABRIC increased the training pool substantially and improved the competitiveness of Liquid/CfC on external cohorts. CPTAC 2020 was the most relevant multimodal external validation cohort because mRNA, CNA, and mutation features were all available. In the initial joined-training comparison, multimodal Liquid/CfC achieved the highest macro F1 among the tested Liquid, MLP, tree, and logistic models, narrowly outperforming mRNA-only MLP (Table~\ref{tab:cptac}; Figure~\ref{fig:cptac}). This finding was subsequently reinterpreted after the extended baseline study, where elastic-net logistic regression and sklearn MLP slightly exceeded Liquid/CfC.
 
 \begin{table}[ht]
 \centering
@@ -41,7 +41,7 @@ MLP & Marker multimodal & 0.8188 & 0.9821 \\
 
 SMC 2018 and SCAN-B were used as mRNA marker external validation cohorts. These cohorts tested cross-cohort transfer of expression-marker models but could not directly evaluate complete multimodal fusion. In SCAN-B, the largest external cohort, ExtraTrees achieved the highest macro F1 (0.8493), followed by Liquid/CfC (0.8172). In SMC 2018, ExtraTrees was also the highest-scoring model (macro F1 = 0.9124), while Liquid/CfC was the strongest neural model (macro F1 = 0.8178).
 
-These results show that strong expression-marker baselines remain difficult to beat when only mRNA features are available. They also indicate that Liquid/CfC is not simply superior by model class; its strongest result emerged in the multimodal CPTAC setting rather than in all expression-only transfers.
+These results show that strong expression-marker baselines remain difficult to beat when only mRNA features are available. They also indicate that Liquid/CfC is not simply superior by model class; its strongest result emerged in the multimodal CPTAC setting rather than in all expression-only transfers. The mRNA-only external validation results are summarized in Table~\ref{tab:mrna_external} and Figure~\ref{fig:top_external}.
 
 \begin{table}[ht]
 \centering
@@ -83,7 +83,7 @@ Therefore, reducing capacity alone did not solve cross-cohort generalization. Th
 
 We next expanded the baseline study to include elastic-net logistic regression, calibrated linear SVM, ridge classifier, shrinkage LDA, Gaussian Naive Bayes, k-nearest neighbors, random forest, ExtraTrees, histogram gradient boosting, and an sklearn MLP. This analysis was performed in the mRNA marker setting because SCAN-B and SMC 2018 did not provide the complete CNA and mutation feature set required for clean multimodal training.
 
-Two training scales were compared. The first used the joined TCGA+METABRIC training pool. The second further added SCAN-B and SMC 2018 to create an expanded mRNA training pool, while keeping CPTAC 2020 as the independent external validation cohort. Contrary to a simple sample-size expectation, the expanded mRNA training pool did not improve the best CPTAC external macro F1. Elastic-net logistic regression and sklearn MLP trained on TCGA+METABRIC slightly exceeded multimodal Liquid/CfC on CPTAC macro F1, although the differences were small.
+Two training scales were compared. The first used the joined TCGA+METABRIC training pool. The second further added SCAN-B and SMC 2018 to create an expanded mRNA training pool, while keeping CPTAC 2020 as the independent external validation cohort. Contrary to a simple sample-size expectation, the expanded mRNA training pool did not improve the best CPTAC external macro F1. Elastic-net logistic regression and sklearn MLP trained on TCGA+METABRIC slightly exceeded multimodal Liquid/CfC on CPTAC macro F1, although the differences were small (Table~\ref{tab:extended_baselines}; Figures~\ref{fig:large_baselines} and~\ref{fig:training_delta}).
 
 \begin{table}[ht]
 \centering
@@ -125,7 +125,7 @@ Expanded mRNA & HistGradientBoosting & mRNA marker & 0.8443 & 0.9869 \\
 
 To move beyond a single-cancer benchmark, we added five cancer-internal prediction tasks from TCGA PanCancer Atlas cohorts. The tasks differed in difficulty. UCEC molecular subtype, COADREAD molecular subtype, and HNSC HPV status were highly predictable, whereas KIRC grade and PRAD pathologic T stage were substantially harder.
 
-No model was best across all tasks. ExtraTrees was strongest for COADREAD molecular subtype and HNSC HPV status. Elastic-net logistic regression was strongest for UCEC molecular subtype. Histogram gradient boosting achieved the highest macro F1 for KIRC grade. small-Liquid/CfC achieved the highest macro F1 for PRAD pathologic T-stage prediction. Complete task-specific model results and label distributions are provided in Supplementary Tables~\ref{tab:supp_label_counts}--\ref{tab:supp_prad}. A core-aligned sensitivity analysis excluding sparse RPPA features is reported in Supplementary Table~\ref{tab:supp_core_aligned}; in that setting, Liquid/CfC was best for COADREAD molecular subtype, whereas other tasks were still led by linear, tree, or boosting baselines. This task-dependent ranking supports the interpretation that Liquid/CfC is a context-dependent fusion candidate rather than a universal winner.
+No model was best across all tasks. ExtraTrees was strongest for COADREAD molecular subtype and HNSC HPV status. Elastic-net logistic regression was strongest for UCEC molecular subtype. Histogram gradient boosting achieved the highest macro F1 for KIRC grade. small-Liquid/CfC achieved the highest macro F1 for PRAD pathologic T-stage prediction (Table~\ref{tab:multicancer_best}; Figures~\ref{fig:multicancer_best} and~\ref{fig:multicancer_heatmap}). Complete task-specific model results and label distributions are provided in Supplementary Tables~\ref{tab:supp_label_counts}--\ref{tab:supp_prad}. A core-aligned sensitivity analysis excluding sparse RPPA features is reported in Supplementary Table~\ref{tab:supp_core_aligned}; in that setting, Liquid/CfC was best for COADREAD molecular subtype, whereas other tasks were still led by linear, tree, or boosting baselines. This task-dependent ranking supports the interpretation that Liquid/CfC is a context-dependent fusion candidate rather than a universal winner.
 
 \begin{table}[ht]
 \centering
